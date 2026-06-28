@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cedar &amp; Ember Coffee Roasters — Small-batch coffee, roasted by hand in Brookhaven, Oregon</title>
+  <meta name="description" content="Cedar &amp; Ember is a local specialty coffee roaster in Brookhaven, Oregon. Small-batch single origins and blends, roasted by hand and rested with patience since 2014.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       Cedar & Ember Coffee Roasters — single-file stylesheet
+       Palette: warm cream + dark-roast brown, mustard accent.
+       Headings: Fraunces (Google Font). Body: system stack.
+       ============================================================ */
+    :root{
+      --cream:        #f5ecdc;   /* light section background          */
+      --cream-2:      #efe2cd;   /* card / surface on cream           */
+      --roast:        #271a10;   /* dark-roast brown section bg       */
+      --roast-2:      #392716;   /* card / surface on dark roast      */
+      --mustard:      #cf9b2d;   /* accent                            */
+      --mustard-deep: #b8862f;   /* deeper accent                     */
+      --tan:          #ecd9a3;   /* light tan (intentionally low-contrast button text) */
+      --ink:          #2a1c12;   /* primary text on cream             */
+      --ink-soft:     #5d4a39;   /* secondary text on cream           */
+      --cream-soft:   #d8c9b3;   /* secondary text on roast           */
+      --line:         rgba(39,26,16,.16);
+      --line-light:   rgba(245,236,220,.18);
+      --shadow:       0 22px 48px -28px rgba(39,26,16,.65);
+      --shadow-soft:  0 14px 30px -22px rgba(39,26,16,.5);
+      --maxw:         1140px;
+      --nav-h:        70px;
+      --radius:       16px;
+      --head: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    *,*::before,*::after{ box-sizing:border-box; }
+
+    html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+
+    body{
+      margin:0;
+      font-family:var(--body);
+      font-size:18px;
+      line-height:1.65;
+      color:var(--ink);
+      background:var(--cream);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    img{ max-width:100%; display:block; }
+
+    a{ color:inherit; text-decoration:none; }
+
+    h1,h2,h3{
+      font-family:var(--head);
+      font-weight:600;
+      line-height:1.08;
+      margin:0;
+      letter-spacing:-.01em;
+    }
+
+    /* ---------- shared layout helpers ---------- */
+    .container{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+    .eyebrow{
+      font-family:var(--body);
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:.72rem;
+      font-weight:700;
+      color:var(--mustard-deep);
+      margin:0 0 14px;
+    }
+
+    .section-title{
+      font-size:clamp(1.9rem, 4.2vw, 3rem);
+      max-width:18ch;
+      margin-bottom:18px;
+    }
+
+    .full-bleed{ padding:clamp(64px,9vw,120px) 0; }
+
+    /* alternating full-bleed section backgrounds: cream <-> dark-roast brown */
+    .bg-roast{ background:var(--roast); color:var(--cream); }
+    .bg-cream{ background:var(--cream); color:var(--ink); }
+    .bg-roast .eyebrow{ color:var(--mustard); }
+
+    /* ============================================================
+       STICKY TOP NAV
+       ============================================================ */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(31,21,13,.92);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line-light);
+    }
+    .nav{
+      height:var(--nav-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; color:var(--cream); }
+    .brand-mark{
+      font-family:var(--head);
+      font-weight:900;
+      font-size:1.15rem;
+      width:40px;height:40px;
+      display:grid;place-items:center;
+      border-radius:50%;
+      background:var(--mustard);
+      color:var(--roast);
+      letter-spacing:-.04em;
+    }
+    .brand-name{ font-family:var(--head); font-weight:600; font-size:1.18rem; letter-spacing:.01em; }
+    .nav-links{ list-style:none; display:flex; gap:30px; margin:0; padding:0; }
+    .nav-links a{
+      color:var(--cream-soft);
+      font-size:.95rem;
+      font-weight:500;
+      letter-spacing:.01em;
+      padding:6px 0;
+      border-bottom:2px solid transparent;
+      transition:color .18s ease, border-color .18s ease;
+    }
+    .nav-links a:hover{ color:var(--mustard); border-color:var(--mustard); }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero{
+      position:relative;
+      min-height:calc(92vh - var(--nav-h));
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:var(--cream);
+      padding:96px 24px 110px;
+      background:
+        linear-gradient(180deg, rgba(22,14,8,.55) 0%, rgba(22,14,8,.82) 100%),
+        url('https://images.unsplash.com/photo-1459755486867-b55449bb39ff?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      background-color:var(--roast);
+    }
+    .hero-content{ max-width:760px; }
+    .hero-eyebrow{
+      text-transform:uppercase;
+      letter-spacing:.32em;
+      font-size:.74rem;
+      font-weight:700;
+      color:var(--mustard);
+      margin:0 0 22px;
+    }
+    .wordmark{
+      font-size:clamp(3rem, 11vw, 6.2rem);
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin:0;
+      text-shadow:0 2px 30px rgba(0,0,0,.35);
+    }
+    .wordmark .amp{ color:var(--mustard); font-style:italic; font-weight:500; }
+    .hero-rule{ width:74px; height:4px; background:var(--mustard); border:0; margin:26px auto 24px; border-radius:2px; }
+    .tagline{
+      font-size:clamp(1.05rem, 2.4vw, 1.4rem);
+      color:#f3e8d6;
+      max-width:30ch;
+      margin:0 auto 36px;
+      line-height:1.55;
+    }
+
+    /* (1) Deliberately LOW-CONTRAST hero CTA:
+       mustard background + light-tan text, very close in luminance. */
+    .cta{
+      display:inline-block;
+      background:var(--mustard);
+      color:var(--tan);
+      font-weight:700;
+      font-size:1.02rem;
+      letter-spacing:.02em;
+      padding:16px 38px;
+      border-radius:999px;
+      box-shadow:0 16px 34px -16px rgba(207,155,45,.7);
+      transition:transform .16s ease;
+    }
+    .cta:hover{ transform:translateY(-2px); }
+
+    /* ============================================================
+       SECTION DIVIDER (shape supplied inline via clip-path)
+       ============================================================ */
+    .section-divider{
+      height:74px;
+      background:var(--mustard);
+      margin-top:-1px;
+    }
+
+    /* ============================================================
+       OUR STORY  (intentionally built as <div> soup)
+       ============================================================ */
+    .story{ background:var(--cream); color:var(--ink); padding:clamp(64px,9vw,120px) 0; }
+    .story-inner{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:0 24px;
+      display:grid;
+      grid-template-columns:700px 1fr;
+      gap:56px;
+      align-items:center;
+    }
+    .story-eyebrow{
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:.72rem;
+      font-weight:700;
+      color:var(--mustard-deep);
+      margin-bottom:14px;
+    }
+    .story-title{
+      font-family:var(--head);
+      font-weight:600;
+      font-size:clamp(1.9rem, 4.2vw, 3rem);
+      line-height:1.08;
+      letter-spacing:-.01em;
+      margin-bottom:22px;
+    }
+    .story-body p{ margin:0 0 18px; color:var(--ink-soft); }
+    .story-body p:first-child{ color:var(--ink); font-size:1.06rem; }
+    .story-signature{
+      font-family:var(--head);
+      font-style:italic;
+      font-size:1.3rem;
+      color:var(--ink);
+      margin-top:8px;
+    }
+    .story-photo img{
+      width:100%;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      aspect-ratio:4/5;
+      object-fit:cover;
+    }
+    .story-photo figcaption,
+    .story-cap{
+      margin-top:12px;
+      font-size:.85rem;
+      color:var(--ink-soft);
+      font-style:italic;
+    }
+
+    /* ============================================================
+       OUR COFFEES — 3-card product grid
+       ============================================================ */
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:28px;
+      margin-top:44px;
+      align-items:start;            /* lets card heights mismatch naturally */
+    }
+    .card{
+      background:var(--roast-2);
+      border:1px solid var(--line-light);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+    }
+    .card-img{ width:100%; aspect-ratio:3/2; object-fit:cover; }
+    .card-body{ padding:26px 26px 30px; display:flex; flex-direction:column; gap:10px; flex:1; }
+    .card-tag{
+      align-self:flex-start;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.66rem;
+      font-weight:700;
+      color:var(--roast);
+      background:var(--mustard);
+      padding:5px 11px;
+      border-radius:999px;
+    }
+    .card-title{ font-size:1.55rem; color:var(--cream); }
+    .card-price{ color:var(--mustard); font-weight:700; font-size:.95rem; margin:0; letter-spacing:.02em; }
+    .card-desc{ color:var(--cream-soft); margin:4px 0 0; font-size:.98rem; }
+    .card-link{
+      margin-top:auto;
+      padding-top:14px;
+      color:var(--mustard);
+      font-weight:700;
+      font-size:.92rem;
+      letter-spacing:.02em;
+    }
+    .card-link:hover{ color:var(--tan); }
+
+    /* ============================================================
+       PHOTO GALLERY — CSS-only carousel (radio + :checked)
+       Non-active slides are HIDDEN (display:none), not scrolled past.
+       ============================================================ */
+    .gallery-head{ text-align:center; }
+    .gallery-head .section-title{ margin-left:auto; margin-right:auto; max-width:none; }
+    .carousel{ position:relative; max-width:940px; margin:46px auto 0; }
+    .carousel > input{ position:absolute; opacity:0; pointer-events:none; }   /* visually hidden radios */
+    .slides{
+      position:relative;
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      aspect-ratio:16/9;
+      background:var(--cream-2);
+    }
+    .slide{ display:none; height:100%; }
+    .slide img{ width:100%; height:100%; object-fit:cover; }
+
+    /* show only the checked slide */
+    #g1:checked ~ .slides .slide--1,
+    #g2:checked ~ .slides .slide--2,
+    #g3:checked ~ .slides .slide--3,
+    #g4:checked ~ .slides .slide--4,
+    #g5:checked ~ .slides .slide--5{ display:block; }
+
+    .slide-cap{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      padding:46px 22px 16px;
+      color:#fff;
+      font-size:.9rem;
+      letter-spacing:.01em;
+      background:linear-gradient(180deg, transparent, rgba(20,13,7,.78));
+    }
+
+    /* prev / next controls (labels pointing at adjacent radios) */
+    .arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:46px;height:46px;
+      display:grid;place-items:center;
+      border-radius:50%;
+      background:rgba(31,21,13,.55);
+      color:#fff;
+      font-size:1.5rem;
+      line-height:1;
+      cursor:pointer;
+      user-select:none;
+      transition:background .16s ease;
+      z-index:2;
+    }
+    .arrow:hover{ background:var(--mustard-deep); }
+    .arrow.prev{ left:14px; }
+    .arrow.next{ right:14px; }
+
+    /* dots */
+    .dots{ display:flex; justify-content:center; gap:12px; margin-top:22px; }
+    .dots label{
+      width:13px;height:13px;
+      border-radius:50%;
+      background:var(--line);
+      cursor:pointer;
+      transition:transform .16s ease, background .16s ease;
+    }
+    .bg-roast .dots label{ background:rgba(245,236,220,.28); }
+    #g1:checked ~ .dots label[for="g1"],
+    #g2:checked ~ .dots label[for="g2"],
+    #g3:checked ~ .dots label[for="g3"],
+    #g4:checked ~ .dots label[for="g4"],
+    #g5:checked ~ .dots label[for="g5"]{ background:var(--mustard); transform:scale(1.3); }
+
+    /* ============================================================
+       TESTIMONIALS  (intentionally built as <div> soup)
+       ============================================================ */
+    .testimonials{ background:var(--roast); color:var(--cream); padding:clamp(64px,9vw,120px) 0; }
+    .t-inner{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+    .t-eyebrow{
+      text-transform:uppercase; letter-spacing:.22em; font-size:.72rem;
+      font-weight:700; color:var(--mustard); margin-bottom:14px;
+    }
+    .t-title{
+      font-family:var(--head); font-weight:600;
+      font-size:clamp(1.9rem,4.2vw,3rem); line-height:1.08; margin-bottom:44px;
+    }
+    .t-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+    .t-card{
+      background:var(--roast-2);
+      border:1px solid var(--line-light);
+      border-radius:var(--radius);
+      padding:30px 28px;
+      display:flex;
+      flex-direction:column;
+    }
+    .t-stars{ color:var(--mustard); letter-spacing:.18em; margin-bottom:14px; font-size:.95rem; }
+    .t-quote{ font-family:var(--head); font-size:1.12rem; line-height:1.5; color:var(--cream); margin-bottom:22px; }
+    .t-author{ font-weight:700; color:#fff; }
+    .t-role{ font-size:.86rem; color:var(--cream-soft); margin-top:2px; }
+
+    /* ============================================================
+       CONTACT
+       ============================================================ */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 1.05fr;
+      gap:56px;
+      align-items:start;
+    }
+    address{ font-style:normal; color:var(--ink-soft); line-height:1.8; }
+    .contact-block{ margin-top:26px; }
+    .contact-block h3{ font-size:1.05rem; color:var(--ink); margin-bottom:6px; font-family:var(--body); font-weight:700; letter-spacing:.02em; }
+    .hours-list{ list-style:none; margin:0; padding:0; color:var(--ink-soft); }
+    .hours-list li{ display:flex; justify-content:space-between; max-width:330px; padding:5px 0; border-bottom:1px dashed var(--line); }
+    .hours-list li span:last-child{ font-weight:600; color:var(--ink); }
+
+    .contact-form{
+      background:var(--cream-2);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:32px 30px;
+      box-shadow:var(--shadow-soft);
+    }
+    .field{ margin-bottom:18px; }
+    .field label{ display:block; font-size:.82rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:7px; }
+    .field input, .field textarea{
+      width:100%;
+      font-family:var(--body);
+      font-size:1rem;
+      color:var(--ink);
+      background:#fffaf0;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:12px 14px;
+    }
+    .field textarea{ min-height:130px; resize:vertical; }
+    .field input:focus, .field textarea:focus{ outline:2px solid var(--mustard); outline-offset:1px; border-color:var(--mustard); }
+    .form-submit{
+      width:100%;
+      border:0;
+      cursor:pointer;
+      background:var(--roast);
+      color:var(--cream);
+      font-family:var(--body);
+      font-weight:700;
+      font-size:1rem;
+      letter-spacing:.03em;
+      padding:15px 20px;
+      border-radius:999px;
+      transition:background .18s ease;
+    }
+    .form-submit:hover{ background:var(--mustard-deep); color:var(--roast); }
+    .form-note{ font-size:.82rem; color:var(--ink-soft); margin:14px 0 0; text-align:center; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer{ background:var(--roast); color:var(--cream-soft); padding:60px 0 34px; border-top:1px solid var(--line-light); }
+    .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:36px; }
+    .footer-brand{ font-family:var(--head); font-size:1.5rem; color:var(--cream); font-weight:600; margin-bottom:10px; }
+    .footer-col h4{ font-size:.78rem; text-transform:uppercase; letter-spacing:.16em; color:var(--mustard); margin:0 0 14px; font-family:var(--body); }
+    .footer-col ul{ list-style:none; margin:0; padding:0; }
+    .footer-col li{ margin-bottom:9px; }
+    .footer-col a:hover{ color:var(--mustard); }
+    .footer-bottom{
+      max-width:var(--maxw); margin:40px auto 0; padding:22px 24px 0;
+      border-top:1px solid var(--line-light);
+      display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+      font-size:.85rem; color:var(--cream-soft);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width:980px){
+      .story-inner{ grid-template-columns:1fr; gap:34px; }
+      .story-photo{ order:-1; }
+      .card-grid{ grid-template-columns:repeat(2,1fr); }
+      .t-grid{ grid-template-columns:1fr; }
+      .contact-grid{ grid-template-columns:1fr; gap:36px; }
+      .footer-grid{ grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:680px){
+      body{ font-size:17px; }
+      .nav-links{ gap:16px; }
+      .nav-links a{ font-size:.86rem; }
+      .brand-name{ display:none; }
+      .card-grid{ grid-template-columns:1fr; }
+      .footer-grid{ grid-template-columns:1fr; }
+      .arrow{ width:40px;height:40px;font-size:1.3rem; }
+    }
+    :target{ scroll-margin-top:calc(var(--nav-h) + 18px); }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== STICKY NAV (semantic) ===================== -->
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Cedar and Ember Coffee Roasters home">
+        <span class="brand-mark">C&amp;E</span>
+        <span class="brand-name">Cedar &amp; Ember</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#coffees">Coffees</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO (semantic) ===================== -->
+    <section class="hero" id="top">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Specialty Coffee · Brookhaven, Oregon</p>
+        <h1 class="wordmark">Cedar <span class="amp">&amp;</span> Ember</h1>
+        <hr class="hero-rule">
+        <p class="tagline">Small-batch coffee, roasted by hand over a slow fire since 2014.</p>
+        <a class="cta" href="#coffees">Shop Our Roasts</a>
+      </div>
+    </section>
+
+    <!-- (2) Section divider — shape supplied with an INLINE clip-path -->
+    <div class="section-divider" style="clip-path: polygon(0 0, 100% 0, 100% 64%, 0 100%)" role="presentation"></div>
+
+    <!-- ===================== OUR STORY (intentional <div> soup) ===================== -->
+    <div class="story" id="story">
+      <div class="story-inner">
+        <div class="story-text">
+          <div class="story-eyebrow">Our Story</div>
+          <!-- (2) heading colored via INLINE style -->
+          <div class="story-title" style="color:#b8862f">Roasted close to home, the slow way</div>
+          <!-- (2) content block locked to a fixed pixel width via INLINE style -->
+          <div class="story-body" style="width:680px">
+            <p>Cedar &amp; Ember started with a secondhand cast-iron drum, a backyard fire, and a stubborn idea: that coffee should taste like the place and the people it came from. In 2014 we set up our first roaster in a drafty workshop off Mill Street and learned the rhythm of heat and time one scorched batch at a time.</p>
+            <p>Ten years on, we still roast every bag within a mile of where you're reading this. We buy green coffee from growers we've met in person, roast in batches small enough to taste as they go, and rest each lot until its flavors settle into something honest — no shortcuts, no anonymous blends, just patient coffee from people who would rather get it right than get it fast.</p>
+            <div class="story-signature">— Nora &amp; Theo, founders</div>
+          </div>
+        </div>
+        <div class="story-photo">
+          <img src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?auto=format&fit=crop&w=900&q=80" alt="Roasting drum tumbling a fresh batch of beans in the Cedar and Ember workshop">
+          <div class="story-cap">Our 1959 cast-iron drum roaster, still earning its keep on Mill Street.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== OUR COFFEES (semantic) ===================== -->
+    <section class="coffees full-bleed bg-roast" id="coffees">
+      <div class="container">
+        <p class="eyebrow">Our Coffees</p>
+        <h2 class="section-title">Roasted in small batches, rested with patience</h2>
+
+        <div class="card-grid">
+
+          <article class="card">
+            <img class="card-img" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=80" alt="Dark-roasted Ember Roast coffee beans cupped in two hands">
+            <div class="card-body">
+              <span class="card-tag">Dark Roast</span>
+              <h3 class="card-title">Ember Roast</h3>
+              <p class="card-price">$19 · 12 oz whole bean</p>
+              <p class="card-desc">Our flagship dark roast — bittersweet cocoa, toasted walnut, and a long, smoky finish that stands up to cream and holds its own pulled as espresso.</p>
+              <a class="card-link" href="#visit">Add to order →</a>
+            </div>
+          </article>
+
+          <!-- (4) This card carries ~3x the body copy of the others, so heights visibly mismatch -->
+          <article class="card">
+            <img class="card-img" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&q=80" alt="A cup of Cedar Hollow coffee photographed from above on a wooden table">
+            <div class="card-body">
+              <span class="card-tag">Medium Roast</span>
+              <h3 class="card-title">Cedar Hollow</h3>
+              <p class="card-price">$18 · 12 oz whole bean</p>
+              <p class="card-desc">The coffee that started it all, and still the one we reach for first. Cedar Hollow is a medium roast built for the long, unhurried morning — balanced, forgiving, and endlessly drinkable. We marry washed beans from the highlands of Huila with a sun-dried natural lot from Ethiopia to land somewhere between comfort and curiosity, with notes of red apple, brown sugar, and a soft floral lift on the finish. It brews beautifully across every method we've tried: rich and syrupy pulled as espresso, clean and aromatic through a pour-over, round and mellow from a French press. This is the bag that lives on our own kitchen counters, the one we press into the hands of friends who swear they "don't really like coffee," and the one our regulars carry out two at a time. We roast it just to the edge of second crack and rest it a full four days before it ever reaches your cup.</p>
+              <a class="card-link" href="#visit">Add to order →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img class="card-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80" alt="A bright, light cup of Morning Fog coffee beside scattered beans">
+            <div class="card-body">
+              <span class="card-tag">Light Roast</span>
+              <h3 class="card-title">Morning Fog</h3>
+              <p class="card-price">$20 · 12 oz whole bean</p>
+              <p class="card-desc">A bright, delicate light roast — jasmine, white peach, and a twist of lemon zest. Best as a slow pour-over that gives the florals room to open up.</p>
+              <a class="card-link" href="#visit">Add to order →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PHOTO GALLERY (semantic) — CSS-only carousel ===================== -->
+    <section class="gallery full-bleed bg-cream" id="gallery">
+      <div class="container gallery-head">
+        <p class="eyebrow">From the Roastery</p>
+        <h2 class="section-title">A few mornings on Mill Street</h2>
+      </div>
+
+      <div class="carousel">
+        <!-- radio state holders -->
+        <input type="radio" name="gallery" id="g1" checked>
+        <input type="radio" name="gallery" id="g2">
+        <input type="radio" name="gallery" id="g3">
+        <input type="radio" name="gallery" id="g4">
+        <input type="radio" name="gallery" id="g5">
+
+        <div class="slides">
+          <!-- slide 1 — alt present -->
+          <div class="slide slide--1">
+            <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=1200&q=80" alt="A pour-over brewing on the bar at Cedar and Ember">
+            <span class="slide-cap">First pour-over of the day, just after open.</span>
+            <label class="arrow prev" for="g5" aria-label="Previous slide">‹</label>
+            <label class="arrow next" for="g2" aria-label="Next slide">›</label>
+          </div>
+          <!-- slide 2 — alt intentionally omitted -->
+          <div class="slide slide--2">
+            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=1200&q=80">
+            <span class="slide-cap">Dialing in the espresso before the morning rush.</span>
+            <label class="arrow prev" for="g1" aria-label="Previous slide">‹</label>
+            <label class="arrow next" for="g3" aria-label="Next slide">›</label>
+          </div>
+          <!-- slide 3 — deliberately BROKEN src (404), alt intentionally omitted -->
+          <div class="slide slide--3">
+            <img src="https://images.unsplash.com/photo-9999999999999-cedarember404roast?auto=format&fit=crop&w=1200&q=80">
+            <span class="slide-cap">Green coffee, weighed out and waiting for the drum.</span>
+            <label class="arrow prev" for="g2" aria-label="Previous slide">‹</label>
+            <label class="arrow next" for="g4" aria-label="Next slide">›</label>
+          </div>
+          <!-- slide 4 — alt present -->
+          <div class="slide slide--4">
+            <img src="https://images.unsplash.com/photo-1500423079914-b65af272b8db?auto=format&fit=crop&w=1200&q=80" alt="Latte art poured into a ceramic cup at the counter">
+            <span class="slide-cap">A rosetta for a regular who never has to order.</span>
+            <label class="arrow prev" for="g3" aria-label="Previous slide">‹</label>
+            <label class="arrow next" for="g5" aria-label="Next slide">›</label>
+          </div>
+          <!-- slide 5 — alt intentionally omitted -->
+          <div class="slide slide--5">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80">
+            <span class="slide-cap">Steamed milk, set down on a reclaimed cedar bar.</span>
+            <label class="arrow prev" for="g4" aria-label="Previous slide">‹</label>
+            <label class="arrow next" for="g1" aria-label="Next slide">›</label>
+          </div>
+        </div>
+
+        <div class="dots" role="tablist" aria-label="Gallery navigation">
+          <label for="g1" aria-label="Go to slide 1"></label>
+          <label for="g2" aria-label="Go to slide 2"></label>
+          <label for="g3" aria-label="Go to slide 3"></label>
+          <label for="g4" aria-label="Go to slide 4"></label>
+          <label for="g5" aria-label="Go to slide 5"></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TESTIMONIALS (intentional <div> soup) ===================== -->
+    <div class="testimonials">
+      <div class="t-inner">
+        <div class="t-eyebrow">Kind Words</div>
+        <div class="t-title">What our regulars say</div>
+        <div class="t-grid">
+
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <div class="t-quote">"I drive past three chain cafés to get here, and I'd do it again every single morning. Their Cedar Hollow quietly ruined drip coffee for me — in the best possible way."</div>
+            <div class="t-author">Marisol Reyes</div>
+            <div class="t-role">Regular since 2017</div>
+          </div>
+
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <div class="t-quote">"We've poured Cedar &amp; Ember at the restaurant for four years now. It's consistent, it's full of character, and the team genuinely cares where every bean comes from."</div>
+            <div class="t-author">Daniel Okafor</div>
+            <div class="t-role">Owner, The Larder</div>
+          </div>
+
+          <div class="t-card">
+            <div class="t-stars">★★★★★</div>
+            <div class="t-quote">"I ordered a single bag online on a whim, and somehow I'm on a standing subscription now. The Morning Fog tastes like the first warm week of spring."</div>
+            <div class="t-author">Priya Nair</div>
+            <div class="t-role">Portland, OR</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== CONTACT (semantic) ===================== -->
+    <section class="contact full-bleed bg-cream" id="visit">
+      <div class="container contact-grid">
+
+        <div class="contact-info">
+          <p class="eyebrow">Visit Us</p>
+          <h2 class="section-title">Come say hello</h2>
+          <address>
+            <strong>Cedar &amp; Ember Coffee Roasters</strong><br>
+            142 Mill Street<br>
+            Brookhaven, OR 97401<br>
+            (541) 555-0173 · hello@cedarandember.coffee
+          </address>
+
+          <div class="contact-block">
+            <h3>Hours</h3>
+            <ul class="hours-list">
+              <li><span>Monday – Friday</span><span>6:30a – 6:00p</span></li>
+              <li><span>Saturday</span><span>7:00a – 5:00p</span></li>
+              <li><span>Sunday</span><span>7:00a – 3:00p</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <form class="contact-form" action="#" method="post" aria-label="Contact form">
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" placeholder="Wholesale inquiry, a question about a roast, or just a hello…" required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+          <p class="form-note">We answer most notes within a day, between roasts.</p>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER (semantic) ===================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Cedar &amp; Ember</div>
+          <p>Small-batch specialty coffee, roasted by hand on Mill Street in Brookhaven, Oregon.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#coffees">Our Coffees</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#visit">Visit Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Find Us</h4>
+          <ul>
+            <li>142 Mill Street</li>
+            <li>Brookhaven, OR 97401</li>
+            <li>(541) 555-0173</li>
+            <li>hello@cedarandember.coffee</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Cedar &amp; Ember Coffee Roasters. Roasted by hand in Oregon.</span>
+        <span>Open daily · Wholesale &amp; subscriptions available</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
